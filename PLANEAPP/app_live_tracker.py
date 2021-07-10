@@ -103,20 +103,15 @@ screen = pygame.display.set_mode((1150, 575))
 # These file paths will vary depeneding on where the images are downloaded
 
 pygame.display.set_caption("Plane Visualizer")
-icon = pygame.image.load(
-    r'C:\Users\hamza\OneDrive\Documents\RC-Autopilot-Plane-main\RC-Autopilot-Plane-main\PLANEAPP\globe.png')
+icon = pygame.image.load('globe.png')
 pygame.display.set_icon(icon)
-
-logo = pygame.image.load(
-    r'C:\Users\hamza\OneDrive\Documents\RC-Autopilot-Plane-main\RC-Autopilot-Plane-main\PLANEAPP\logo.png')
+logo = pygame.image.load('logo.png')
 logo = pygame.transform.scale(logo, (140, 120))
 
-b2 = pygame.image.load(
-    r'C:\Users\hamza\OneDrive\Documents\RC-Autopilot-Plane-main\RC-Autopilot-Plane-main\PLANEAPP\b2.png')
+b2 = pygame.image.load('b2.png')
 b2 = pygame.transform.scale(b2, (600, 600))
 
-plane_art = pygame.image.load(
-    r'C:\Users\hamza\OneDrive\Documents\RC-Autopilot-Plane-main\RC-Autopilot-Plane-main\PLANEAPP\plane.png')
+plane_art = pygame.image.load('plane.png')
 plane_art = pygame.transform.scale(plane_art, (30, 30))
 
 # trajectory_list
@@ -311,7 +306,7 @@ while runner:
         joystick.init()
 
     # Reading in PS4 buttons
-    with open(os.path.join(r'C:\Users\hamza\OneDrive\Documents\RC-Autopilot-Plane-main\RC-Autopilot-Plane-main\Arduino_Code\ps4keys.JSON'), "r+") as file:
+    with open(os.path.join(('ps4keys.JSON'), "r+") as file:
         button_keys = json.load(file)
 
     # 0: Left-analog Horz 1: Left-analog Vertical 2: Right-analog Horz
@@ -319,7 +314,7 @@ while runner:
     analog_keys = {0: 0, 1: 0, 2: 0, 3: 0, 4: -1, 5: 1}
 
     # Player
-    playerImg = pygame.image.load(r'C:\Users\hamza\OneDrive\Documents\RC-Autopilot-Plane-main\RC-Autopilot-Plane-main\PLANEAPP\globe.png')
+    playerImg = pygame.image.load('globe.png')
     playerX = 370
     playerY = 480
     playerX_change = 0
