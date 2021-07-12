@@ -182,18 +182,17 @@ if app_version:
         string = string.replace('\r', '')
         string = string.rstrip()
 
-# Initialising Controller values
-HLA = "00"
-VLA = "00"
-HRA = "00"
-RT = "00"
 
 #initialize stat list
-stat_tracker = stat_list(screen, 625, 785, 20, 30)
+stat_tracker = stat_list(screen, 625, 785, 20, 30, 70)
 stat_tracker.add_stat("Time Elapsed")
 stat_tracker.add_stat("Average Velocity")
 stat_tracker.add_stat("Distance Tracker")
 stat_tracker.add_stat("Time Remaining")
+
+
+#radar distance
+radar_distance = 0
 
 # game_loop
 runner = True
@@ -213,36 +212,36 @@ while runner:
     background()
     c1 = time_elapsed % 50
     # pygame.draw.circle(screen, (c1*4, 60+(c1*3), 250-(c1*5)), (630,410), 100)
-
-
-
     
-
-    pygame.draw.circle(screen, 'green', (260, 267), 255)
-    # pygame.draw.circle(screen, 'blue', (630,410), 100)
-    pygame.draw.circle(screen, 'blue', (260, 267), 250)
+    radar_distance+=2
+    pygame.draw.rect(screen, 'blue', (0,0,590,600))
+    pygame.draw.circle(screen, (13, 152, 186), (280, 280), int(radar_distance), 2)
+    
+    if radar_distance >= 275:
+        radar_distance = 0
 
     rect = (10, 17, 600, 500)
     screen.blit(b2, (0, 0))
 
-    pygame.draw.rect(screen, (179,205,224), (580,0,20,600))
+    pygame.draw.rect(screen, (179,205,224), (590,0,10,600))
 
-    pygame.draw.line(screen, 'red', (252, 259), (268, 275), 5)
-    pygame.draw.line(screen, 'red', (252, 275), (268, 259), 5)
+    pygame.draw.line(screen, 'red', (270, 270), (290, 290), 5)
+    pygame.draw.line(screen, 'red', (270, 290), (290, 270), 5)
 
-    pygame.draw.line(screen, 'black', (10, 267), (510, 267), 3)
-    pygame.draw.line(screen, 'black', (260, 17), (260, 517), 3)
+    pygame.draw.line(screen, 'black', (0, 280), (590, 280), 3)
+    pygame.draw.line(screen, 'black', (280, 0), (280, 600), 3)
 
     sinx = int(math.sin(time_elapsed) * 250)
     cosx = int(math.cos(time_elapsed) * 250)
 
-    pygame.draw.line(screen, 'green', (260, 267), (260 + cosx, 267 + sinx), 1)
+    #rotating_green_ting
+    #pygame.draw.line(screen, 'green', (280, 280), (280 + cosx, 280 + sinx), 1)
 
-    for x in range(11):
-        pygame.draw.line(screen, 'black', (10 + (50 * x), 260), (10 + (50 * x), 274), 2)
-        pygame.draw.line(screen, 'black', (253, 17 + (50 * x)), (267, 17 + (50 * x)), 2)
+    # for x in range(11):
+    #     pygame.draw.line(screen, 'black', (10 + (50 * x), 260), (10 + (50 * x), 274), 2)
+    #     pygame.draw.line(screen, 'black', (253, 17 + (50 * x)), (267, 17 + (50 * x)), 2)
 
-    pygame.draw.line(screen, 'black', (10, 267), (510, 267), 2)
+    #pygame.draw.line(screen, 'black', (10, 267), (510, 267), 2)
 
     if app_version:
         plane_rot = plane_rotation(bearing, rotation)
@@ -268,6 +267,7 @@ while runner:
 
     time_elapsed = format_time(round(time_elapsed, 1))
     stat_tracker.display_stats()
+    stat_tracker.display_stat("BOREALIS TRACKER", 655, 30, 40)
 
 
 
@@ -288,6 +288,7 @@ while runner:
         joysticks.append(pygame.joystick.Joystick(i))
     for joystick in joysticks:
         joystick.init()
+    
 
     # Reading in PS4 buttons
     with open(os.path.join('ps4keys.JSON'), "r+") as file:
@@ -305,6 +306,12 @@ while runner:
     playerY_change = 0
 
     # Gaining PS4 Controller access
+    
+# Initialising Controller values
+    HLA = "00"
+    VLA = "00"
+    HRA = "00"
+    RT = "00"
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
