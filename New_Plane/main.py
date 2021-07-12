@@ -116,6 +116,10 @@ b2 = pygame.transform.scale(b2, (600, 600))
 plane_art = pygame.image.load('images/plane.png')
 plane_art = pygame.transform.scale(plane_art, (30, 30))
 
+aurora = pygame.image.load('images/aurora.png')
+aurora = pygame.transform.scale(aurora, (100,75))
+
+
 # trajectory_list
 trajectory = []
 
@@ -220,8 +224,12 @@ while runner:
     if radar_distance >= 275:
         radar_distance = 0
 
+    pygame.draw.rect(screen, (179,205,224), (615,25,500,60))
+    pygame.draw.rect(screen, (90, 188, 216), (620,30,490,50))
+
     rect = (10, 17, 600, 500)
     screen.blit(b2, (0, 0))
+    screen.blit(aurora, (1000, 15))
 
     pygame.draw.rect(screen, (179,205,224), (590,0,10,600))
 
@@ -267,7 +275,7 @@ while runner:
 
     time_elapsed = format_time(round(time_elapsed, 1))
     stat_tracker.display_stats()
-    stat_tracker.display_stat("BOREALIS TRACKER", 655, 30, 40)
+    stat_tracker.display_stat("BOREALIS TRACKER", 630, 40, 35, (1,31,75))
 
 
 

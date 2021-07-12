@@ -14,9 +14,9 @@ class stat_list:
         self.screen = screen
         self.down = down
 
-    def display_stat(self, stat, pos_x, pos_y, size = 15):
+    def display_stat(self, stat, pos_x, pos_y, size = 15, color = (90,188,216)):
         font = pygame.font.Font('freesansbold.ttf', size)
-        display = font.render(str(stat), True,(90,188,216))
+        display = font.render(str(stat), True,color)
         return self.screen.blit(display, ((pos_x), (pos_y)))
 
     def add_stat(self, stat_name, stat_input = ""):
